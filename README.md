@@ -1,8 +1,9 @@
 # BearGraph
 A dashboard, to be ran locally, to view your [Bear](https://bear.app/) Notes as a graph.
+
 ![](media/usage.gif)
 
-## Implementaiton
+## Implementation
 The graph is constructed using the Bear sqlite database using links between notes as well as the tag structure. 
 In addition, backlinks are ignored if the links come after `BACKLINKS_HEADER` (which is specified in `run_bear_graph.py`).
 
