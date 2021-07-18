@@ -21,5 +21,5 @@ to build the UI.
 Make sure `DEFAULT_DB_PATH` and `BACKLINKS_HEADER` are configured correctly in `run_bear_graph.py`
 
 ```bash
-streamlit run bear.py
+streamlit run run_bear_graph.py
 ```
