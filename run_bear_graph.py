@@ -19,11 +19,11 @@ def build_streamlit_graph(bear_db_path, backlinks_header):
         if note['ID'] not in notes_to_tag:
             continue
 
-        nodes.append(Node(note['ID'], label=note['Title'], color='#453d3c'))
+        nodes.append(Node('NOTE_' + note['UID'], label=note['Title'], color='#453d3c', uid=note['UID']))
 
         # Add an edge from each leaf tag to corresponding note with tag
         for tag in notes_to_tag[note['ID']]:
-            edges.append(Edge(source=tag, target=note['ID']))
+            edges.append(Edge(source='TAG_' + tag, target='NOTE_' + note['UID']))
 
         # Get notes this note is referenced by
         linked_by_notes = bear_db.get_notes_linking_to(note['ID'], bear_db_path)
@@ -31,14 +31,14 @@ def build_streamlit_graph(bear_db_path, backlinks_header):
             lb_note_text = linked_by_note['Text'].split(backlinks_header)[0]
             # if the current(target) note is linked in the source note, before the backlinks section
             if ('[[' + note['Title'] + ']]') in lb_note_text:
-                edges.append(Edge(source=linked_by_note['ID'], target=note['ID'],
+                edges.append(Edge(source='NOTE_' + linked_by_note['UID'], target='NOTE_' + note['UID'],
                                   color='#385385'))
 
     for node in G_tag.nodes:
-        nodes.append(Node(node, label=node, color='#db230b'))
+        nodes.append(Node('TAG_' + node, label=node, color='#db230b'))
 
     for src, dest in G_tag.edges:
-        edges.append(Edge(source=src, target=dest, color='#d3d3d3'))
+        edges.append(Edge(source='TAG_' + src, target='TAG_' + dest, color='#d3d3d3'))
 
     nodes_in_edges = set()
     for edge in edges:
@@ -88,6 +88,7 @@ config = Config(width=1250,
                 minZoom=0.1,
                 staticGraphWithDragAndDrop=False,
                 staticGraph=False,
+                onClickNode=None,
                 initialZoom=1
                 )
 
