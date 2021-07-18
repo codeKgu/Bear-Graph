@@ -42,16 +42,16 @@
                                     }
                                 },
                                 onDoubleClickNode: function(n) {
-                                    window.open('bear://x-callback-url/open-note?id='.concat(n), '_blank')
+                                    // window.alert("Double clicked node ".concat(n))
                                 },
                                 onRightClickNode: function(n, t) {
-                                    window.alert("Right clicked node ".concat(t))
+                                    // window.alert("Right clicked node ".concat(t))
                                 },
                                 onClickLink: function(n, t) {
-                                    window.alert("Clicked link between ".concat(n, " and ").concat(t))
+                                    // window.alert("Clicked link between ".concat(n.split('_')[1], " and ").concat(t.split('_')[1]))
                                 },
                                 onRightClickLink: function(n, t, e) {
-                                    window.alert("Right clicked link between ".concat(t, " and ").concat(e))
+                                    // window.alert("Right clicked link between ".concat(t.split('_')[1], " and ").concat(e.split('_')[1]))
                                 }
                             })
                         }, n
